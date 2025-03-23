@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "aula-1",
-    "slug": "snack-3b52767b-439b-40c3-bc86-b4ea1f6f0b87",
+    "name": "CookingApp",
+    "slug": "cooking-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,6 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
