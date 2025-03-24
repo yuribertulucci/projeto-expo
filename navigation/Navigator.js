@@ -11,21 +11,11 @@ import Favoritos from '../screens/Favoritos';
 import Perfil from '../screens/Perfil';
 import Pesquisa from '../screens/Pesquisa';
 import Categorias from '../screens/Categorias';
+import MainTabs from "./MainTabs";
 
 // Crie os navegadores
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-// Componente para o Tab Navigator
-function MainTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="MenuPrincipal" component={MenuPrincipal} options={{ title: 'Início' }} />
-      <Tab.Screen name="Pesquisa" component={Pesquisa} options={{ title: 'Pesquisar' }} />
-      <Tab.Screen name="Perfil" component={Perfil} options={{ title: 'Perfil' }} />
-    </Tab.Navigator>
-  );
-}
 
 // Navegador principal (Stack Navigator)
 export default function Navigator({ onLayout }) {
@@ -39,10 +29,12 @@ export default function Navigator({ onLayout }) {
         <Stack.Screen name="DetalhesReceita" component={DetalhesReceita} />
         <Stack.Screen name="Favoritos" component={Favoritos} />
         <Stack.Screen name="Categorias" component={Categorias} />
+
+        {/* Bottom Menu Navigator */}
         <Stack.Screen
           name="Main"
           component={MainTabs}
-          options={{ headerShown: false }} // Esconde o cabeçalho do Stack para as abas
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
