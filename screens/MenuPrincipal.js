@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 export default function MenuPrincipal({ navigation }) {
   const { login, user, loading } = useAuth();
   useEffect(() => {
-    if (user === null) {
+    if (!loading && user === null) {
       navigation.navigate('Login');
     }
   }, [user, navigation]);
