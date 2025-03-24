@@ -1,24 +1,30 @@
 import {View, TextInput, Button, Text} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from '../context/AuthContext';
+import {useEffect, useState} from "react";
 
-export default function Login() {
-  const navigation = useNavigation();
+export default function Login({navigation}) {
+  const { login, user, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const tryLogin = (email, senha) => {
-    if (email === 'admin@admin.com' && senha === 'admin') {
-			const user = {nome: 'Admin', email: 'admin@admin.com', senha: 'admin'};
-      AsyncStorage.setItem('user', JSON.stringify(user))
-        .then(() => {
-          navigation.navigate('MenuPrincipal');
-        });
-    } else {
-      alert('Usuário ou senha inválidos');
-    }
+  if (loading) {
+    return <Text>Carregando...</Text>;
   }
+
+	useEffect(() => {
+		if (user) {
+			navigation.navigate('MenuPrincipal');
+		}
+	}, [user, navigation]); // Dependências: user e navigation
+
+  const handleLogin = () => {
+		if (email === 'admin@admin.com' && senha === 'admin') {
+			const userData = {nome: 'Admin', email: email, senha: senha};
+			login(userData);
+		} else {
+			alert('Email ou senha inválidos');
+		}
+  };
 
   return (
     <View style={{flex: 1, padding: 20}}>
@@ -36,7 +42,7 @@ export default function Login() {
         value={senha}
         onChangeText={setSenha}
       />
-      <Button title="Entrar" onPress={() => tryLogin(email, senha)}/>
+      <Button title="Entrar" onPress={handleLogin}/>
       <Button title="Registrar" onPress={() => navigation.navigate('Registro')}/>
     </View>
   );

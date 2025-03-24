@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-import Navigator from './navigation/Navigator'; // Importe o seu navegador
+import Navigator from './navigation/Navigator';
+import { AuthProvider } from './context/AuthContext';
 
 // Evite que a tela de splash seja escondida automaticamente
 SplashScreen.preventAutoHideAsync();
@@ -23,7 +23,6 @@ export default function App() {
       } catch (e) {
         console.warn(e);
       } finally {
-        // Indique que o app está pronto
         setAppIsReady(true);
       }
     }
@@ -33,16 +32,17 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      // Esconda a tela de splash quando o app estiver pronto
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null; // Não renderize nada até que o app esteja pronto
+    return null;
   }
 
   return (
-    <Navigator onLayout={onLayoutRootView} />
+    <AuthProvider>
+      <Navigator onLayout={onLayoutRootView} />
+    </AuthProvider>
   );
 }

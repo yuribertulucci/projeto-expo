@@ -1,11 +1,13 @@
 import {View, TextInput, Button, Text} from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useState} from 'react';
+import {useAuth} from "../context/AuthContext";
 
 export default function Registro({navigation}) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const {login, user, loading} = useAuth();
 
   const register = (nome, email, senha) => {
     if (!verifyParams(nome, email, senha)) {
@@ -13,13 +15,8 @@ export default function Registro({navigation}) {
     }
     // Salvar dados no AsyncStorage
     const user = {nome, email, senha};
-    AsyncStorage.setItem('user', JSON.stringify(user))
-    .then(() => {
-      alert('Usuário registrado com sucesso!');
-    })
-    .catch((error) => {
-      console.error('Erro ao registrar usuário:', error);
-    });
+    login(user);
+    navigation.navigate('MenuPrincipal');
   };
 
   const verifyParams = (nome, email, senha) => {
