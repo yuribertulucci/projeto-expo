@@ -16,7 +16,7 @@ export default function Registro({navigation}) {
     // Salvar dados no AsyncStorage
     const user = {nome, email, senha};
     login(user);
-    navigation.navigate('MenuPrincipal');
+    navigation.replace('Main');
   };
 
   const verifyParams = (nome, email, senha) => {

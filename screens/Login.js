@@ -13,7 +13,7 @@ export default function Login({navigation}) {
 
 	useEffect(() => {
 		if (user) {
-			navigation.navigate('MenuPrincipal');
+			navigation.navigate('Main');
 		}
 	}, [user, navigation]); // Dependências: user e navigation
 

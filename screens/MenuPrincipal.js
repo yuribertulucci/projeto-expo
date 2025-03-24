@@ -6,7 +6,7 @@ export default function MenuPrincipal({ navigation }) {
   const { login, user, loading } = useAuth();
   useEffect(() => {
     if (!loading && user === null) {
-      navigation.navigate('Login');
+      navigation.replace('Login');
     }
   }, [user, navigation]);
 
@@ -25,8 +25,6 @@ export default function MenuPrincipal({ navigation }) {
       }}>
         <Button title="Lista de Receitas" onPress={() => navigation.navigate('ListaReceitas')}/>
         <Button title="Favoritos" onPress={() => navigation.navigate('Favoritos')}/>
-        <Button title="Perfil" onPress={() => navigation.navigate('Perfil')}/>
-        <Button title="Pesquisar" onPress={() => navigation.navigate('Pesquisa')}/>
         <Button title="Categorias" onPress={() => navigation.navigate('Categorias')}/>
       </View>
     </View>
