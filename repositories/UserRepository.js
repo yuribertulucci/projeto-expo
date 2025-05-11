@@ -1,4 +1,5 @@
-import {collection, doc, setDoc, getDoc, updateDoc} from 'firebase/firestore';
+import {collection, doc, setDoc, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
+import {deleteUser as deleteUserAuth} from 'firebase/auth';
 import FirebaseService from '../services/FirebaseService';
 import User from '../models/User';
 
@@ -6,6 +7,7 @@ class UserRepository {
   constructor() {
     const firebase = FirebaseService.getInstance();
     this.firestore = firebase.firestore;
+    this.auth = firebase.auth;
     this.usersCollection = collection(this.firestore, 'users');
   }
 
@@ -50,6 +52,7 @@ class UserRepository {
     try {
       const userRef = doc(this.firestore, 'users', uid);
       await deleteDoc(userRef);
+      await deleteUserAuth(this.auth.currentUser);
     } catch (error) {
       console.error('Erro ao deletar usuário:', error);
       throw error;
