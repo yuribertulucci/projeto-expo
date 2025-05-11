@@ -18,12 +18,19 @@ export default function Login({navigation}) {
 	}, [user, navigation]); // Dependências: user e navigation
 
   const handleLogin = () => {
-		if (email === 'admin@admin.com' && senha === 'admin') {
-			const userData = {nome: 'Admin', email: email, senha: senha};
-			login(userData);
-		} else {
-			alert('Email ou senha inválidos');
-		}
+    if (!email || !senha) {
+      alert('Preencha todos os campos');
+      return;
+    }
+
+    login(email, senha)
+      .then(() => {
+        navigation.replace('Main');
+      })
+      .catch((error) => {
+        console.error('Erro ao fazer login:', error);
+        alert('Erro ao fazer login. Verifique suas credenciais.');
+      });
   };
 
   return (

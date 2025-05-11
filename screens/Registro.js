@@ -1,21 +1,17 @@
 import {View, TextInput, Button, Text} from 'react-native';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useState} from 'react';
 import {useAuth} from "../context/AuthContext";
+import User from "../models/User";
 
 export default function Registro({navigation}) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const {login, user, loading} = useAuth();
+  const {login, user, loading, register} = useAuth();
 
-  const register = (nome, email, senha) => {
-    if (!verifyParams(nome, email, senha)) {
-      return;
-    }
-    // Salvar dados no AsyncStorage
-    const user = {nome, email, senha};
-    login(user);
+  const registerUser = async (nome, email, senha) => {
+    const user = new User(null, nome, email);
+    const result = await register(user, senha);
     navigation.replace('Main');
   };
 
@@ -47,7 +43,7 @@ export default function Registro({navigation}) {
         style={{borderWidth: 1, marginVertical: 10}}
         onChangeText={(text) => setSenha(text)}
       />
-      <Button title="Cadastrar" onPress={() => register(nome, email, senha)}/>
+      <Button title="Cadastrar" onPress={() => registerUser(nome, email, senha)}/>
     </View>
   );
 }

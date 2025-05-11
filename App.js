@@ -3,9 +3,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import Navigator from './navigation/Navigator';
 import { AuthProvider } from './context/AuthContext';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import MenuPrincipal from "./screens/MenuPrincipal";
-import Pesquisa from "./screens/Pesquisa";
-import Perfil from "./screens/Perfil";
 
 // Evite que a tela de splash seja escondida automaticamente
 SplashScreen.preventAutoHideAsync();
