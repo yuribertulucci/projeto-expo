@@ -23,8 +23,8 @@ export default function Navigator({ onLayout }) {
     <NavigationContainer onReady={onLayout}>
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Registro" component={Registro} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Registro" component={Registro} options={{ headerShown: false }} />
         <Stack.Screen name="ListaReceitas" component={ListaReceitas} />
         <Stack.Screen name="DetalhesReceita" component={DetalhesReceita} />
         <Stack.Screen name="Favoritos" component={Favoritos} />
