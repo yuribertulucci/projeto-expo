@@ -1,9 +1,10 @@
-import {View, Button, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {useAuth} from "../context/AuthContext";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import styles from "../css/styles";
 
 export default function MenuPrincipal({ navigation }) {
-  const { login, user, loading } = useAuth();
+  const { user, loading } = useAuth();
   useEffect(() => {
     if (!loading && user === null) {
       navigation.replace('Login');
@@ -14,7 +15,6 @@ export default function MenuPrincipal({ navigation }) {
     <View style={{ flex: 1, padding: 20 }}>
       <Text style={{ marginBottom: 12, fontSize: 20 }}>Olá, {user?.nome ?? 'erro'}!</Text>
       <Text>Email: {user?.email ?? 'erro'}</Text>
-      <Text style={{ marginBottom: 24 }}>Senha: {user?.senha ?? 'erro'}</Text>
       <View style={{
         flexDirection: 'column',
         height: 100,
@@ -23,9 +23,16 @@ export default function MenuPrincipal({ navigation }) {
         marginTop: 24,
         gap: 12,
       }}>
-        <Button title="Lista de Receitas" onPress={() => navigation.navigate('ListaReceitas')}/>
-        <Button title="Favoritos" onPress={() => navigation.navigate('Favoritos')}/>
-        <Button title="Categorias" onPress={() => navigation.navigate('Categorias')}/>
+
+        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('ListaReceitas')}>
+          <Text style={styles.textoBotao}>Lista de Receitas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Favoritos')}>
+          <Text style={styles.textoBotao}>Favoritos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Categorias')}>
+          <Text style={styles.textoBotao}>Categorias</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
