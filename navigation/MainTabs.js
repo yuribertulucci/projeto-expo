@@ -29,7 +29,7 @@ function MainTabs() {
       })}
     >
       <Tab.Screen name="MenuPrincipal" component={MenuPrincipal} options={{ title: 'Início', headerShown: false }} />
-      <Tab.Screen name="Pesquisa" component={Pesquisa} options={{ title: 'Pesquisar' }} />
+      <Tab.Screen name="Pesquisa" component={Pesquisa} options={{ title: 'Pesquisar', headerShown: false }} />
       <Tab.Screen name="Perfil" component={Perfil} options={{ title: 'Perfil' }} />
     </Tab.Navigator>
   );
